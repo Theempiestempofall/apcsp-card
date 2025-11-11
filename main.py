@@ -10,6 +10,10 @@ wn.setup(width=800, height=600)
 #openrouter = OpenRouter()
 
 # Create a trtl
+presidentTurtle = trtl.Turtle()
+presidentTurtle.hideturtle()
+branchTurtle = trtl.Turtle()
+branchTurtle.hideturtle()
 t = trtl.Turtle()
 t.hideturtle()
 t.shape("turtle") 
@@ -42,15 +46,19 @@ presidentVoices = {
 }
 
 def askQuestions():
-    global name, favoritePresident, militaryBranch
+    global name, favoritePresident, militaryBranch, presidentTurtle, branchTurtle
 
     name = wn.textinput("Question 1", "What is your name?").capitalize()
     favoritePresident = wn.textinput(f"Question 2", f"Thanks {name}, who is your favorite president? (Trump, Biden, Obama, FDR, Kennedy)").capitalize()
     while favoritePresident not in presidents:
         favoritePresident = wn.textinput(f"Question 2", f"Please insert a valid president (Trump, Biden, Obama, FDR, Kennedy)").capitalize()
+    presidentImage = f"{favoritePresident}.jpeg"
+    presidentTurtle.shape(shape = presidentImage)
     militaryBranch = wn.textinput("Question 3", "What branch of the military did you serve in? (Navy, Army, Marines, Coast Guard, Air Force, Space Force)").capitalize()
     while militaryBranch not in branches:
         militaryBranch = wn.textinput(f"Question 3", f"Please insert a valid branch (Navy, Army, Marines, Coast Guard, Air Force, Space Force)").capitalize()
+    branchImage = f"{militaryBranch}.jpeg"
+    branchTurtle.shape(shape = branchImage)
 
 def genSpeech(name, favoritePresident, militaryBranch):
     makePrompt = f"Make a speech thanking {name}, a U.S. Military veteran who was in the {militaryBranch} branch in the style of {favoritePresident}. Limit your response to 1 paragraph"
